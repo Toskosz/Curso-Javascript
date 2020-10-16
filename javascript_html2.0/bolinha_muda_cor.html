@@ -1,0 +1,43 @@
+<canvas width="600" height="400"></canvas>
+
+<script type="text/javascript">
+	
+	var tela = document.querySelector("canvas");
+	var pincel = tela.getContext("2d");
+
+	pincel.fillStyle = "grey";
+	pincel.fillRect(0, 0, 600, 400);
+
+	var cores = ["blue", "red", "green"]
+	var indiceCorAtual = 0; //comceça com blue
+
+	function exibeCirculo(evento) {
+		
+		var x = evento.pageX - tela.offsetLeft;
+		var y = evento.pageY - tela.offsetTop;
+
+		pincel.fillStyle = cores[indiceCorAtual];
+		pincel.beginPath();
+		pincel.arc(x, y, 10, 0, 2 * 3.14);
+		pincel.fill();
+		console.log(x + ", " + y);
+	}
+
+	function mudaCor() {
+		
+		indiceCorAtual++;
+		
+		if(indiceCorAtual >= cores.length) {
+			indiceCorAtual = 0; //volta para blue
+		}
+
+		console.log(indiceCorAtual);
+
+		return false; // para não exibir o menu padrão do canvas
+	}
+
+	tela.onclick = exibeCirculo;
+
+	tela.oncontextmenu = mudaCor;
+
+</script>
